@@ -19,12 +19,33 @@ Deno.test("URLs resolve", async () => {
   stop()
 })
 
-Deno.test("Import maps resolve", async () => {
+Deno.test("Import maps resolve with trailing slash", async () => {
   const result = await build({
     entryPoints: ["./test/map.ts"],
     plugins: [denoResolve({
       imports: {
         "keycode/": "https://deno.land/x/cliffy@v0.24.2/keycode/"
+      }
+    })],
+    bundle: true,
+    write: false,
+    format: "esm",
+    outfile: "bundle.js"
+  })!
+
+  const file = new TextDecoder().decode(result.outputFiles![0].contents)
+
+  assert(file.includes("KeyMap"))
+
+  stop()
+})
+
+Deno.test("Import maps resolve with no trailing slash", async () => {
+  const result = await build({
+    entryPoints: ["./test/map-basic.ts"],
+    plugins: [denoResolve({
+      imports: {
+        "keycode": "https://deno.land/x/cliffy@v0.24.2/keycode/mod.ts"
       }
     })],
     bundle: true,
