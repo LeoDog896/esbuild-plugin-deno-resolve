@@ -13,7 +13,7 @@ export default function entry(
           const { importer, path } = args;
 
           return {
-            path: join(importer, "../", path),
+            path: path.startsWith("http") ? path : join(importer, "../", path),
             namespace: "deno-url",
           };
         }
