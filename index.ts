@@ -1,6 +1,20 @@
 import { Plugin } from "https://deno.land/x/esbuild@v0.14.48/mod.js";
 import { join } from "https://deno.land/std@0.147.0/path/mod.ts";
 
+function resolveURL(path: string, importer: string) {
+  if (path.startsWith("http")) {
+    return path;
+  }
+
+  if (path.startsWith("/")) {
+    return `${importer.startsWith("http") ? "http" : "https"}://${importer.split("/")[2]}${path}`;
+  }
+
+  return join(importer, "../", path);
+
+
+}
+
 export default function entry(
   map: { imports: { [key: string]: string } } = { imports: {} },
 ): Plugin {
@@ -13,7 +27,7 @@ export default function entry(
           const { importer, path } = args;
 
           return {
-            path: path.startsWith("http") ? path : join(importer, "../", path),
+            path: resolveURL(path, importer),
             namespace: "deno-url",
           };
         }

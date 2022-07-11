@@ -112,12 +112,30 @@ Deno.test("Non-existant URLs (404) throws an error", async () => {
   stop();
 });
 
-Deno.test("Real world use case works (esm.sh)", async () => {
+Deno.test("Real world use case works (esm.sh -- react)", async () => {
   await build({
     entryPoints: ["./test/react.ts"],
     plugins: [denoResolve({
       imports: {
         "react": "https://esm.sh/react",
+      },
+    })],
+    bundle: true,
+    write: false,
+    format: "esm",
+    outfile: "bundle.js",
+    logLevel: "silent",
+  });
+
+  stop();
+});
+
+Deno.test("Real world use case works (esm.sh -- react-dom)", async () => {
+  await build({
+    entryPoints: ["./test/react-dom.ts"],
+    plugins: [denoResolve({
+      imports: {
+        "react-dom/": "https://esm.sh/react-dom?path=/",
       },
     })],
     bundle: true,
