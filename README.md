@@ -1,5 +1,7 @@
 # esbuild-plugin-deno-resolve
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/LeoDog896/esbuild-plugin-deno-resolve)
+
 This is a plugin made in deno that resolves deno import maps and URL imports.
 
 ## Usage
@@ -9,7 +11,7 @@ import denoResolve from "https://deno.land/x/esbuild_plugin_deno_resolve/index.t
 
 esbuild.build({
   ...,
-  plugins: [denoResolve()],
+  plugins: [denoResolve(JSON.parse(await Deno.readTextFile("import_map.json")))],
 })
 ```
 
