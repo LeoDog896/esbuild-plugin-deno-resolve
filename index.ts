@@ -20,15 +20,15 @@ export async function simpleURLResolve(path: string): Promise<string> {
 
   if (response.status !== 200) {
     response.body?.cancel();
-    throw Error(response.status.toString())
+    throw Error(response.status.toString());
   }
 
-  return await response.text()
+  return await response.text();
 }
 
 /**
  * Returns an esbuild plugin for resolving deno modules.
- * 
+ *
  * @param map The import map in JSON format
  * @param urlResolve Specifies a URL resolving function. The default uses the Deno cache
  */
