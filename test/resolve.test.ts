@@ -1,4 +1,4 @@
-import { build, stop } from "https://deno.land/x/esbuild@v0.14.51/mod.js";
+import { build, stop } from "https://deno.land/x/esbuild@v0.15.16/mod.js";
 import denoResolve from "../index.ts";
 import { assert } from "https://deno.land/std@0.150.0/testing/asserts.ts";
 

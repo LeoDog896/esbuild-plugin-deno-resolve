@@ -1,5 +1,5 @@
-import { Plugin } from "https://deno.land/x/esbuild@v0.14.51/mod.js";
-import { join } from "https://deno.land/std@0.150.0/path/mod.ts";
+import { Plugin } from "https://deno.land/x/esbuild@v0.15.16/mod.js";
+import { join } from "https://deno.land/std@0.167.0/path/mod.ts";
 
 function resolveURL(path: string, importer: string) {
   if (path.startsWith("http")) {
